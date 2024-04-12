@@ -76,14 +76,17 @@ func main() {
 
 			if !(unchanged) {
 				for i := 0; i < n; i++ {
-					var delta int8 = int8(lightness[i]) - int8(prevLightness[i])
+					// var delta int8 = 3
+					// fmt.Printf("There was a change: delta =    %d %d\n", prevLightness[i], lightness[i])
 					if delta > threshold || delta < -threshold {
-						var brightness int8 = normalBrightness + (int8(lightness[1])-50)*maxDeviation/100
-						fmt.Printf("Changed Brightness for Screen #%d\nLightness: %d\nNewBrightness: %dlightness\n\n", i, lightness[i], brightness)
+						// var brightness int8 = normalBrightness + ((int8(lightness[i]) - 50) * maxDeviation / 50)
 					}
 				}
 				prevLightness = lightness
 			}
+			// else {
+			// 	fmt.Printf("No changes were found, %d\n", lightness[0])
+			// }
 
 		}()
 	}
