@@ -81,7 +81,7 @@ func main() {
 					// fmt.Printf("There was a change: delta =    %d %d\n", prevLightness[i], lightness[i])
 					if delta > threshold || delta < -threshold {
 						// var brightness int8 = normalBrightness + ((int8(lightness[i]) - 50) * maxDeviation / 50)
-						var brightness int = (normalBrightness) + (int(lightness[i])-50)*(maxDeviation)/50
+						var brightness int = (normalBrightness) + (50-int(lightness[i]))*(maxDeviation)/50
 						fmt.Printf("Changed Brightness for Screen #%d\nLightness: %d%%\nNewBrightness: %d%%\n\n", i, lightness[i], brightness)
 					}
 				}
