@@ -14,7 +14,7 @@ import (
 	"github.com/kbinani/screenshot"
 )
 
-func getPercentLightness(img image.Image) uint8 {
+func getPercentLightness(img image.Image) int8 {
 	imgSize := img.Bounds().Size()
 
 	var sum uint
@@ -25,7 +25,7 @@ func getPercentLightness(img image.Image) uint8 {
 	}
 	sum = sum / uint(imgSize.X*imgSize.Y)
 
-	var percentage uint8 = uint8(100 * sum / 255)
+	var percentage int8 = int8(100 * int(sum) / 255)
 
 	return percentage
 }
@@ -33,10 +33,10 @@ func getPercentLightness(img image.Image) uint8 {
 func main() {
 
 	n := screenshot.NumActiveDisplays()
-	var normalBrightness int8 = 40
-	var maxDeviation int8 = 20
-	var threshold int8 = 5
-	var prevLightness []uint8
+	var normalBrightness int = 40
+	var maxDeviation int = 20
+	var threshold int8 = 3
+	prevLightness := make([]int8, n)
 
 	fmt.Printf("Detected %d displays connected\n", n)
 	for i := 0; i < n; i++ {
@@ -76,10 +76,13 @@ func main() {
 
 			if !(unchanged) {
 				for i := 0; i < n; i++ {
+					delta := (lightness[i]) - (prevLightness[i])
 					// var delta int8 = 3
 					// fmt.Printf("There was a change: delta =    %d %d\n", prevLightness[i], lightness[i])
 					if delta > threshold || delta < -threshold {
 						// var brightness int8 = normalBrightness + ((int8(lightness[i]) - 50) * maxDeviation / 50)
+						var brightness int = (normalBrightness) + (int(lightness[i])-50)*(maxDeviation)/50
+						fmt.Printf("Changed Brightness for Screen #%d\nLightness: %d%%\nNewBrightness: %d%%\n\n", i, lightness[i], brightness)
 					}
 				}
 				prevLightness = lightness
