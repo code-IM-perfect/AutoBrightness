@@ -68,15 +68,10 @@ func main() {
 					log.Fatalln(err)
 				}
 				lig := getPercentLightness(img)
-				if unchanged {
-					if prevLightness[i] != lig {
-						unchanged = false
-						lightness = prevLightness
-						lightness[i] = lig
-					}
-				} else {
-					lightness[i] = lig
+				if unchanged && (prevLightness[i] != lig) {
+					unchanged = false
 				}
+				lightness[i] = lig
 			}
 
 			if !(unchanged) {
