@@ -57,7 +57,10 @@ func main() {
 				n = k
 			}
 
-			var lightness []uint8
+			// var lightness []uint8
+			lightness := make([]int8, n)
+
+			copy(lightness, prevLightness)
 
 			for i := 0; i < n; i++ {
 				img, err := screenshot.CaptureDisplay(i)
