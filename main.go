@@ -33,22 +33,25 @@ func getPercentLightness(img image.Image) int8 {
 func main() {
 
 	n := screenshot.NumActiveDisplays()
-	var normalBrightness int = 40
-	var maxDeviation int = 20
+	var refreshRate time.Duration = 1
+	var normalBrightness int16 = 40
+	var maxDeviation int16 = 20
 	var threshold int8 = 3
 	prevLightness := make([]int8, n)
 
-	fmt.Printf("Detected %d displays connected\n", n)
-	for i := 0; i < n; i++ {
-		img, err := screenshot.CaptureDisplay(i)
-		if err != nil {
-			log.Fatalln(err)
-		}
-		prevLightness[i] = getPercentLightness(img)
-		fmt.Printf("Display #%d\nLightness: %d%%\n\n", i, prevLightness[i])
-	}
+	fmt.Println()
 
-	for range time.Tick(time.Second * 2) {
+	fmt.Printf("Detected %d displays connected\n", n)
+	// for i := 0; i < n; i++ {
+	// 	img, err := screenshot.CaptureDisplay(i)
+	// 	if err != nil {
+	// 		log.Fatalln(err)
+	// 	}
+	// 	prevLightness[i] = getPercentLightness(img)
+	// 	fmt.Printf("Display #%d\nLightness: %d%%\n\n", i, prevLightness[i])
+	// }
+
+	for range time.Tick(time.Second * refreshRate) {
 		go func() {
 			unchanged := true
 			k := screenshot.NumActiveDisplays()
@@ -81,7 +84,7 @@ func main() {
 					// fmt.Printf("There was a change: delta =    %d %d\n", prevLightness[i], lightness[i])
 					if delta > threshold || delta < -threshold {
 						// var brightness int8 = normalBrightness + ((int8(lightness[i]) - 50) * maxDeviation / 50)
-						var brightness int = (normalBrightness) + (50-int(lightness[i]))*(maxDeviation)/50
+						brightness := (normalBrightness) + (50-int16(lightness[i]))*(maxDeviation)/50
 						fmt.Printf("Changed Brightness for Screen #%d\nLightness: %d%%\nNewBrightness: %d%%\n\n", i, lightness[i], brightness)
 					}
 				}
@@ -90,7 +93,6 @@ func main() {
 			// else {
 			// 	fmt.Printf("No changes were found, %d\n", lightness[0])
 			// }
-
 		}()
 	}
 
