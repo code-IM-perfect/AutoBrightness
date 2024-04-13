@@ -91,6 +91,17 @@ func setBrightness(brightness int16, i int) {
 		// 	fmt.Printf("%s %s %s %s %s\n", "brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), " ", ""), "s", fmt.Sprintf("%d%%", brightness[i]))
 		// }
 
+	case "windows":
+		fmt.Println("oof microshit windows detected")
+		exec.Command("powershell", fmt.Sprintf("(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(%d,%d)", i, brightness))
+
+	case "darwin":
+		fmt.Println("Sorry the changing brightness part is not supported for macOS")
+
+	default:
+		fmt.Println("Seriously tf is this OS")
+	}
+}
 
 func main() {
 
