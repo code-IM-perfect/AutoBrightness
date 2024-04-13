@@ -8,6 +8,9 @@ import (
 
 	// _ "image/png"
 	// "os"
+	"os/exec"
+	"regexp"
+	"runtime"
 
 	"time"
 
@@ -30,7 +33,68 @@ func getPercentLightness(img image.Image) int8 {
 	return percentage
 }
 
+// func setBrightnessAll(brightness []int16) {
+// 	switch runtime.GOOS {
+// 	case "linux":
+// 		// fmt.Println("yoo deez linux")
+
+// 		noOfDevicesRegex := regexp.MustCompile(" '(.*)' ")
+// 		backlightDump, err := exec.Command("brightnessctl", "-lc", "backlight").Output()
+// 		if err != nil {
+// 			fmt.Println(err.Error())
+// 			return
+// 		}
+// 		displays := noOfDevicesRegex.FindAll(backlightDump, -1)
+
+// 		// fmt.Printf("the devices: %q\n", displays)
+
+// 		for i := 0; i < len(displays); i++ {
+// 			// out, err := exec.Command("brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), "'", " "), "s", fmt.Sprintf("%d%%", brightness[i])).Output()
+// 			out, err := exec.Command("brightnessctl", "-d", "intel_backlight", "s", fmt.Sprintf("%d%%", brightness[i])).Output()
+// 			fmt.Println(out, err)
+// 			fmt.Printf("%s %s %s %s %s\n", "brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), " ", ""), "s", fmt.Sprintf("%d%%", brightness[i]))
+// 		}
+
+// 	case "windows":
+// 		fmt.Printf("microshit windows detected")
+
+// 	default:
+// 		fmt.Println("tf is this OS")
+// 	}
+// }
+
+func setBrightness(brightness int16, i int) {
+	switch runtime.GOOS {
+	case "linux":
+		// fmt.Println("yoo deez linux")
+
+		noOfDevicesRegex := regexp.MustCompile(" '(.*)' ")
+		backlightDump, err := exec.Command("brightnessctl", "-lc", "backlight").Output()
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+		displays := noOfDevicesRegex.FindAll(backlightDump, -1)
+
+		// fmt.Printf("the devices: %q\n", displays)
+
+		exec.Command("brightnessctl", "-d", string(displays[i][2:(len(displays[i])-2)]), "s", fmt.Sprintf("%d%%", brightness)).Output()
+		// out, err := exec.Command("brightnessctl", "-d", "intel_backlight", "s", fmt.Sprintf("%d%%", brightness)).Output()
+		// fmt.Println(out, err)
+		// fmt.Printf("%s %s %s %s %s\n", "brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), " ", ""), "s", fmt.Sprintf("%d%%", brightness))
+		// fmt.Printf("%s %s %s %s %s\n", "brightnessctl", "-d", string(displays[i][2:(len(displays[i])-2)]), "s", fmt.Sprintf("%d%%\n", brightness))
+
+		// for i := 0; i < len(displays); i++ {
+		// 	// out, err := exec.Command("brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), "'", " "), "s", fmt.Sprintf("%d%%", brightness[i])).Output()
+		// 	out, err := exec.Command("brightnessctl", "-d", "intel_backlight", "s", fmt.Sprintf("%d%%", brightness)).Output()
+		// 	fmt.Println(out, err)
+		// 	fmt.Printf("%s %s %s %s %s\n", "brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), " ", ""), "s", fmt.Sprintf("%d%%", brightness[i]))
+		// }
+
+
 func main() {
+
+	// setBrightness(30, 0)
 
 	n := screenshot.NumActiveDisplays()
 	var refreshRate time.Duration = 1
@@ -86,6 +150,7 @@ func main() {
 						// var brightness int8 = normalBrightness + ((int8(lightness[i]) - 50) * maxDeviation / 50)
 						brightness := (normalBrightness) + (50-int16(lightness[i]))*(maxDeviation)/50
 						fmt.Printf("Changed Brightness for Screen #%d\nLightness: %d%%\nNewBrightness: %d%%\n\n", i, lightness[i], brightness)
+						setBrightness(brightness, i)
 					}
 				}
 				prevLightness = lightness
