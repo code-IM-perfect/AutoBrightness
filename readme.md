@@ -26,36 +26,12 @@ A direct implementation on linux would have simply included editing `/sys/class/
 Some programs like `brightnessctl` and `light` [seem to add udev rules](https://wiki.archlinux.org/title/Backlight#Backlight_utilities) to get write access to the file, but I don't understand how exactly that works. I decided to go with `brightnessctl` because it is available in the `extra` repo of Arch (plus I already use it lol). This is in my TODO.
 
 ## Dependencies
-There is a screen capture liibrary as a go library but go would satisfy it automatically. 
-### Linux
-AutoBrightnessAdjuster utilises [`brightnessctl`](https://github.com/Hummer12007/brightnessctl) to set the brightness. Look at the [instructions for you distro](https://github.com/Hummer12007/brightnessctl#installation).\
-The go dependencies will be satisfied by go itself.
-
-<!-- #### Arch
-```
-sudo pacman -S brightnessctl
-```
-#### Debian / Ubuntu
-```
-sudo apt install brightnessctl
-```
-#### Redhat based distros (Fedora / opensuse)
-```
-sudo dnf install brightnessctl
-``` -->
-
-### Windows
-There are only go dependencies which will be handled by go itself.
-
-### MacOS
-Brightness control is not supported yet, otherwise there are no other non-go dependencies.
-
-> **Note:** A direct implementation on linux would have simply included editing `/sys/class/backlight/< Name of Display >/brightness` but that would have required sudo access which I felt was dangerous.
->
->Some programs like `brightnessctl` and `light` [seem to add udev rules](https://wiki.archlinux.org/title/Backlight#Backlight_utilities) to get write access to the file, but I don't understand how exactly that works. I decided to go with `brightnessctl` because it is available in the `extra` repo of Arch (plus I already use it lol).
+[golang](go.dev) is needed to build, but is not a runtime dependency.
 
 ## Buiding
-First clone this repo
+First ensure that you have `go` installed
+
+Clone this repo
 ```
 git clone 'https://github.com/code-IM-perfect/AutoBrightness'
 ```
@@ -69,3 +45,31 @@ Prebuilt binaries for Linux, Windows and MacOS can be found in [Releases](https:
 ```
 
 ```
+
+
+
+
+
+<!-- There is a screen capture liibrary as a go library but go would satisfy it automatically. 
+### Linux
+AutoBrightnessAdjuster utilises [`brightnessctl`](https://github.com/Hummer12007/brightnessctl) to set the brightness. Look at the [instructions for you distro](https://github.com/Hummer12007/brightnessctl#installation).\
+The go dependencies will be satisfied by go itself.
+
+#### Arch
+```
+sudo pacman -S brightnessctl
+```
+#### Debian / Ubuntu
+```
+sudo apt install brightnessctl
+```
+#### Redhat based distros (Fedora / opensuse)
+```
+sudo dnf install brightnessctl
+```
+
+### Windows
+There are only go dependencies which will be handled by go itself.
+
+### MacOS
+Brightness control is not supported yet, otherwise there are no other non-go dependencies. -->
