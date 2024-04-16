@@ -33,38 +33,10 @@ func getPercentLightness(img image.Image) int8 {
 	return percentage
 }
 
-// func setBrightnessAll(brightness []int16) {
-// 	switch runtime.GOOS {
-// 	case "linux":
-// 		// fmt.Println("yoo deez linux")
-
-// 		noOfDevicesRegex := regexp.MustCompile(" '(.*)' ")
-// 		backlightDump, err := exec.Command("brightnessctl", "-lc", "backlight").Output()
-// 		if err != nil {
-// 			fmt.Println(err.Error())
-// 			return
-// 		}
-// 		displays := noOfDevicesRegex.FindAll(backlightDump, -1)
-
-// 		// fmt.Printf("the devices: %q\n", displays)
-
-// 		for i := 0; i < len(displays); i++ {
-// 			// out, err := exec.Command("brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), "'", " "), "s", fmt.Sprintf("%d%%", brightness[i])).Output()
-// 			out, err := exec.Command("brightnessctl", "-d", "intel_backlight", "s", fmt.Sprintf("%d%%", brightness[i])).Output()
-// 			fmt.Println(out, err)
-// 			fmt.Printf("%s %s %s %s %s\n", "brightnessctl", "-d", strings.ReplaceAll(string(displays[i]), " ", ""), "s", fmt.Sprintf("%d%%", brightness[i]))
-// 		}
-
-// 	case "windows":
-// 		fmt.Printf("microshit windows detected")
-
-// 	default:
-// 		fmt.Println("tf is this OS")
-// 	}
-// }
+const GOOS string = runtime.GOOS
 
 func setBrightness(brightness int16, i int) {
-	switch runtime.GOOS {
+	switch GOOS {
 	case "linux":
 		backlightDump, err := exec.Command("brightnessctl", "-lc", "backlight").Output()
 		if err != nil {
