@@ -13,6 +13,12 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 - Changes the brightness of the monitor accordingly ~~<span style="color:#ed8796">THIS IS STILL A TODO</span>~~ [Only for Linux and Windows]
 - Does all this with **every** connected monitor
 
+## TODO
+- Make the transition smooth
+- Get rid of the `brightnessctl` dependency on Linux
+- Disable it when videos are being played
+
+
 ## Dependencies
 There is a screen capture liibrary as a go library but go would satisfy it automatically. 
 ### Linux
