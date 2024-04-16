@@ -18,6 +18,12 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 - Get rid of the `brightnessctl` dependency on Linux
 - Disable it when videos are being played
 
+## Note for Linux users
+AutoBrightnessAdjuster requires that `brightnessctl` be installed.
+
+A direct implementation on linux would have simply included editing `/sys/class/backlight/< Name of Display >/brightness` but that would have required sudo access which I felt was dangerous.
+
+Some programs like `brightnessctl` and `light` [seem to add udev rules](https://wiki.archlinux.org/title/Backlight#Backlight_utilities) to get write access to the file, but I don't understand how exactly that works. I decided to go with `brightnessctl` because it is available in the `extra` repo of Arch (plus I already use it lol). This is in my TODO.
 
 ## Dependencies
 There is a screen capture liibrary as a go library but go would satisfy it automatically. 
