@@ -108,8 +108,7 @@ func main() {
 	// setBrightness(30, 0)
 
 	n := screenshot.NumActiveDisplays()
-	var refreshRate time.Duration = 1
-	var normalBrightness int16 = 40
+	refreshRate := 0.5
 	var maxDeviation int16 = 20
 	var threshold int8 = 3
 	prevLightness := make([]int8, n)
@@ -126,7 +125,7 @@ func main() {
 	// 	fmt.Printf("Display #%d\nLightness: %d%%\n\n", i, prevLightness[i])
 	// }
 
-	for range time.Tick(time.Second * refreshRate) {
+	for range time.Tick(time.Millisecond * time.Duration(1000*refreshRate)) {
 		go func() {
 			unchanged := true
 			k := screenshot.NumActiveDisplays()
