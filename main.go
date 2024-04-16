@@ -109,6 +109,7 @@ func main() {
 
 	n := screenshot.NumActiveDisplays()
 	refreshRate := 0.5
+	var normalBrightness int16 = 30
 	var maxDeviation int16 = 20
 	var threshold int8 = 3
 	prevLightness := make([]int8, n)
