@@ -18,6 +18,8 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 - Get rid of the `brightnessctl` dependency on Linux
 - Disable it when videos are being played
 
+> **Note:** Windows and MacOS are untested, but they should work, I'll test once I get time.
+
 ## Note for Linux users
 AutoBrightnessAdjuster requires that `brightnessctl` be installed.
 
