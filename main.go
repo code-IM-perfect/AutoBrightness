@@ -49,7 +49,7 @@ func setBrightness(brightness int16, i int) {
 		exec.Command("brightnessctl", "-d", string(displays[i][2:(len(displays[i])-2)]), "s", fmt.Sprintf("%d%%", brightness)).Output()
 
 	case "windows":
-		fmt.Println("oof microshit windows detected")
+		// fmt.Println("oof microshit windows detected")
 		exec.Command("powershell", fmt.Sprintf("(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(%d,%d)", i+1, brightness))
 
 	case "darwin":
