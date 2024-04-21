@@ -17,6 +17,7 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 - Make the transition smooth
 - Get rid of the `brightnessctl` dependency on Linux
 - Disable it when videos are being played
+- Add support for changing brightness on macOS (currently you can use this program in combination with apple script)
 
 > **Note:** Windows and MacOS are untested, but they should work, I'll test once I get time.
 
