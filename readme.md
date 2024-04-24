@@ -14,6 +14,7 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 - Does all this with **every** connected monitor
 
 ## TODO
+- Add config and flags to configure parameters
 - Make the transition smooth
 - Get rid of the `brightnessctl` dependency on Linux
 - Disable it when videos are being played
