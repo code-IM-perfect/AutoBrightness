@@ -52,7 +52,7 @@ func setBrightness(brightness int16, i int) {
 
 	case "windows":
 		// fmt.Println("oof microshit windows detected")
-		exec.Command("powershell", fmt.Sprintf("(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(%d,%d)", i+1, brightness))
+		exec.Command("powershell", fmt.Sprintf("(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(%d,%d)", i+1, brightness)).Output()
 
 	case "darwin":
 		fmt.Println("Sorry the changing brightness part is not supported for macOS")
