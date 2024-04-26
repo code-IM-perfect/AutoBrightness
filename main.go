@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"image"
 	"image/color"
@@ -62,6 +63,17 @@ func setBrightness(brightness int16, i int) {
 
 func main() {
 	n := screenshot.NumActiveDisplays()
+
+	// Flags
+	rate := flag.Float64("rate", 0.5, "Set the Rescan Rate (0.5 == rescan every 0.5 sec to refresh)")
+	mid := flag.Int("mid", 30, "Set the Normal Brightness (0-100)")
+	deviate := flag.Int("deviate", 20, "Set the Maximum Deviation from the normal brightness")
+	thresh := flag.Int("thresh", 3, "Set the maximum deviation from the Normal Brightness")
+	// conf := flag.String("conf", "nope", "Use a config file")
+
+	flag.Parse()
+
+	// fmt.Println(int16(*mid))
 
 	// Configurable Variables
 	refreshRate := 0.5
