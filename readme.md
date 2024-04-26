@@ -16,12 +16,14 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 ## TODO
 - ~~Add ability for this program to change brightness~~ [Mac is still not implemented tho]
 - ~~Add flags to configure parameters~~
+- ~~Windows Testing~~
+- MacOS Testing
 - Make the transition smooth
 - Get rid of the `brightnessctl` dependency on Linux
 - Disable it when videos are being played
 - Add support for changing brightness on macOS (currently you can use this program in combination with apple script)
 
-> **Note:** Windows and MacOS are untested, but they should work, I'll test once I get time.
+<!-- > **Note:** Windows and MacOS are untested, but they should work, I'll test once I get time. -->
 
 ## Note for Linux users
 AutoBrightnessAdjuster requires that `brightnessctl` be installed.
@@ -47,43 +49,37 @@ git clone 'https://github.com/code-IM-perfect/AutoBrightness'
 cd AutoBrightness
 ```
 
-Now you can build the 
+Now just run
 ```
 go build -o autoBrightness .
 ```
-
+Or for windows-
+```
+go build -o autoBrightness.exe .
+```
+This will download all the required go dependencies (if not already intsalled) and will build the program.
 
 
 
 
 ## Usage
-After building, it can be used 
-There are many paramete
-
-
-
-
-
-<!-- There is a screen capture liibrary as a go library but go would satisfy it automatically. 
-### Linux
-AutoBrightnessAdjuster utilises [`brightnessctl`](https://github.com/Hummer12007/brightnessctl) to set the brightness. Look at the [instructions for you distro](https://github.com/Hummer12007/brightnessctl#installation).\
-The go dependencies will be satisfied by go itself.
-
-#### Arch
+After building, it can be used by 
 ```
-sudo pacman -S brightnessctl
+./autoBrightness  <<Options>>
 ```
-#### Debian / Ubuntu
+#### Example usage
 ```
-sudo apt install brightnessctl
-```
-#### Redhat based distros (Fedora / opensuse)
-```
-sudo dnf install brightnessctl
+./autoBrightness --mid 20 --deviate 10
 ```
 
-### Windows
-There are only go dependencies which will be handled by go itself.
 
-### MacOS
-Brightness control is not supported yet, otherwise there are no other non-go dependencies. -->
+### Options
+#### `--deviate [int]`
+Set the Maximum Deviation from the normal brightness (default 20)
+
+#### `-mid [int]`
+Set the Normal Brightness (0-100) (default 30)
+#### `-rate [float]`
+Set the Rescan Rate (0.5 == rescan every 0.5 sec to refresh) (default 0.5)
+#### `-thresh [int]`
+Set the treshold used while deciding if the change in lightness is large enough (implementaion is complicated, so find an appropriate value by experimenting) (default 3)
