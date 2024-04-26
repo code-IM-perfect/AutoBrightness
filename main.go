@@ -70,9 +70,7 @@ func main() {
 	var threshold int8 = 3
 	prevLightness := make([]int8, n)
 
-	fmt.Println()
-
-	fmt.Printf("Detected %d displays connected\n", n)
+	fmt.Printf("\nDetected %d displays connected\n", n)
 
 	for range time.Tick(time.Millisecond * time.Duration(1000*refreshRate)) {
 		go func() {
