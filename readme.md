@@ -10,11 +10,12 @@ Ever got blinded by a sudden blast of light mode? Well this programs aims to eli
 - Repeats this in some interval (every `refreshRate` seconds)
 - Compares it with the previous value
 - If the change in whiteness is above a threshold, calculates an appropriate brightness and prints it
-- Changes the brightness of the monitor accordingly ~~<span style="color:#ed8796">THIS IS STILL A TODO</span>~~ [Only for Linux and Windows]
+- Changes the brightness of the monitor accordingly [Only for Linux and Windows]
 - Does all this with **every** connected monitor
 
 ## TODO
-- Add config and flags to configure parameters
+- ~~Add ability for this program to change brightness~~ [Mac is still not implemented tho]
+- ~~Add flags to configure parameters~~
 - Make the transition smooth
 - Get rid of the `brightnessctl` dependency on Linux
 - Disable it when videos are being played
@@ -32,23 +33,32 @@ Some programs like `brightnessctl` and `light` [seem to add udev rules](https://
 ## Dependencies
 [golang](go.dev) is needed to build, but is not a runtime dependency.
 
+## Prebuilt Binaries
+Prebuilt binaries for Linux, Windows and MacOS can be found in [Releases](https://github.com/code-IM-perfect/AutoBrightness/releases). 
+
+Otherwise you can build it yourself from the instructions below.
+
 ## Buiding
 First ensure that you have `go` installed
 
-Clone this repo
+Clone this repo and move into the cloned directory
 ```
 git clone 'https://github.com/code-IM-perfect/AutoBrightness'
+cd AutoBrightness
+```
+
+Now you can build the 
+```
+go build -o autoBrightness .
 ```
 
 
-## Prebuilt Binaries
-Prebuilt binaries for Linux, Windows and MacOS can be found in [Releases](https://github.com/code-IM-perfect/AutoBrightness/releases).
+
 
 
 ## Usage
-```
-
-```
+After building, it can be used 
+There are many paramete
 
 
 
