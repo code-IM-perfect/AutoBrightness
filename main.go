@@ -6,6 +6,7 @@ import (
 	"image"
 	"image/color"
 	"log"
+	"os"
 
 	// _ "image/png"
 	// "os"
@@ -70,6 +71,12 @@ func main() {
 	deviate := flag.Int("deviate", 20, "Set the Maximum Deviation from the normal brightness")
 	thresh := flag.Int("thresh", 3, "Set the treshold used while deciding if the change in lightness is large enough (implementaion is complicated, so find an appropriate value by experimenting)")
 	// conf := flag.String("conf", "nope", "Use a config file")
+
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage:\n\t%s\n\t%s [Options]\n\n", os.Args[0], os.Args[0])
+		fmt.Printf("Options:\n")
+		flag.PrintDefaults()
+	}
 
 	flag.Parse()
 
